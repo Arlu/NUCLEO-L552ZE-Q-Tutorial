@@ -23,9 +23,29 @@
   #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
 #endif
 
+#define ITM_TCR_SYNCENA_Pos    2U
+#define ITM_TCR_SYNCENA_Msk   (1UL << ITM_TCR_SYNCENA_Pos)
+#define ITM_TCR_TSENA_Pos      1U
+#define ITM_TCR_TSENA_Msk     (1UL << ITM_TCR_TSENA_Pos)
+#define ITM_TCR_ITMENA_Msk    (1UL /*<< ITM_TCR_ITMENA_Pos*/)
+
+#define DEMCR                 *((volatile uint32_t*) 0xE000EDFCU )
+#define TCR                   *((volatile uint32_t*) 0xE0000E00 )
+#define TER                   *((volatile uint32_t*) 0xE0000E80 )
+#define LAR                   *((volatile uint32_t*) 0xE0000FB0 )
+
+void SWO_init()
+{
+	DEMCR |= (1 << 24);
+	LAR = 0xC5ACCE55;
+	TCR = ITM_TCR_ITMENA_Msk | ITM_TCR_TSENA_Msk | ITM_TCR_SYNCENA_Msk;
+	TER = 0x1;
+}
+
 int main(void)
 {
     /* Loop forever */
+//	SWO_init();
 	printf("Hello World from STM32L552ZE!\n");
 	for(;;);
 }
