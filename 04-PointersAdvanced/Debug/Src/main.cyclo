@@ -1,0 +1,7 @@
+../Src/main.c:29:5:add	1
+../Src/main.c:30:5:multiply	1
+../Src/main.c:32:5:calculate	1
+../Src/main.c:45:6:modifyValue	1
+../Src/main.c:49:6:passToModifier	1
+../Src/main.c:53:6:updateVariable	1
+../Src/main.c:58:5:main	1

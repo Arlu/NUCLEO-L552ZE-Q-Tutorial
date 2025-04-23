@@ -1,0 +1,7 @@
+../Src/main.c:29:5:add	16	static
+../Src/main.c:30:5:multiply	16	static
+../Src/main.c:32:5:calculate	24	static
+../Src/main.c:45:6:modifyValue	16	static
+../Src/main.c:49:6:passToModifier	16	static
+../Src/main.c:53:6:updateVariable	16	static
+../Src/main.c:58:5:main	24	static

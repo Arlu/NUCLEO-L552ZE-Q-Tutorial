@@ -1,84 +1,14 @@
-17:28:32 **** Incremental Build of configuration Debug for project MCU-HelloWorld ****
+22:44:30 **** Incremental Build of configuration Debug for project 04-PointersAdvanced ****
 make -j24 all 
 arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m33 -std=gnu11 -g3 -DDEBUG -DNUCLEO_L552ZE_Q -DSTM32 -DSTM32L5 -DSTM32L552ZETxQ -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/main.o"
-arm-none-eabi-gcc -o "MCU-HelloWorld.elf" @"objects.list"   -mcpu=cortex-m33 -T"F:\Embedded\STM32\NUCLEO-L552ZE-Q\MCU-HelloWorld\STM32L552ZETXQ_FLASH.ld" --specs=nosys.specs -Wl,-Map="MCU-HelloWorld.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: MCU-HelloWorld.elf
+arm-none-eabi-gcc -o "04-PointersAdvanced.elf" @"objects.list"   -mcpu=cortex-m33 -T"F:\Embedded\STM32\NUCLEO-L552ZE-Q\04-PointersAdvanced\STM32L552ZETXQ_FLASH.ld" --specs=nosys.specs -Wl,-Map="04-PointersAdvanced.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: 04-PointersAdvanced.elf
  
-arm-none-eabi-size  MCU-HelloWorld.elf 
-arm-none-eabi-objdump -h -S MCU-HelloWorld.elf  > "MCU-HelloWorld.list"
+arm-none-eabi-size  04-PointersAdvanced.elf 
+arm-none-eabi-objdump -h -S 04-PointersAdvanced.elf  > "04-PointersAdvanced.list"
    text	   data	    bss	    dec	    hex	filename
-   3576	     92	   1900	   5568	   15c0	MCU-HelloWorld.elf
+   5096	     92	   1900	   7088	   1bb0	04-PointersAdvanced.elf
 Finished building: default.size.stdout
  
-Finished building: MCU-HelloWorld.list
- 
-17:28:40 **** Incremental Build of configuration Debug for project MCU-HelloWorld ****
-make -j24 all 
-arm-none-eabi-size  MCU-HelloWorld.elf 
-   text	   data	    bss	    dec	    hex	filename
-   3576	     92	   1900	   5568	   15c0	MCU-HelloWorld.elf
-Finished building: default.size.stdout
- 
-17:33:16 **** Incremental Build of configuration Debug for project MCU-HelloWorld ****
-make -j24 all 
-arm-none-eabi-size  MCU-HelloWorld.elf 
-   text	   data	    bss	    dec	    hex	filename
-   3576	     92	   1900	   5568	   15c0	MCU-HelloWorld.elf
-Finished building: default.size.stdout
- 
-17:33:57 **** Incremental Build of configuration Debug for project MCU-HelloWorld ****
-make -j24 all 
-arm-none-eabi-size  MCU-HelloWorld.elf 
-   text	   data	    bss	    dec	    hex	filename
-   3576	     92	   1900	   5568	   15c0	MCU-HelloWorld.elf
-Finished building: default.size.stdout
- 
-17:34:23 **** Incremental Build of configuration Debug for project MCU-HelloWorld ****
-make -j24 all 
-arm-none-eabi-size  MCU-HelloWorld.elf 
-   text	   data	    bss	    dec	    hex	filename
-   3576	     92	   1900	   5568	   15c0	MCU-HelloWorld.elf
-Finished building: default.size.stdout
- 
-17:34:55 **** Incremental Build of configuration Debug for project MCU-HelloWorld ****
-make -j24 all 
-arm-none-eabi-size  MCU-HelloWorld.elf 
-   text	   data	    bss	    dec	    hex	filename
-   3576	     92	   1900	   5568	   15c0	MCU-HelloWorld.elf
-Finished building: default.size.stdout
- 
-17:35:38 **** Incremental Build of configuration Debug for project MCU-HelloWorld ****
-make -j24 all 
-arm-none-eabi-size  MCU-HelloWorld.elf 
-   text	   data	    bss	    dec	    hex	filename
-   3576	     92	   1900	   5568	   15c0	MCU-HelloWorld.elf
-Finished building: default.size.stdout
- 
-17:36:12 **** Incremental Build of configuration Debug for project MCU-HelloWorld ****
-make -j24 all 
-arm-none-eabi-size  MCU-HelloWorld.elf 
-   text	   data	    bss	    dec	    hex	filename
-   3576	     92	   1900	   5568	   15c0	MCU-HelloWorld.elf
-Finished building: default.size.stdout
- 
-17:39:37 **** Incremental Build of configuration Debug for project MCU-HelloWorld ****
-make -j24 all 
-arm-none-eabi-size  MCU-HelloWorld.elf 
-   text	   data	    bss	    dec	    hex	filename
-   3576	     92	   1900	   5568	   15c0	MCU-HelloWorld.elf
-Finished building: default.size.stdout
- 
-17:40:05 **** Incremental Build of configuration Debug for project MCU-HelloWorld ****
-make -j24 all 
-arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m33 -std=gnu11 -g3 -DDEBUG -DNUCLEO_L552ZE_Q -DSTM32 -DSTM32L5 -DSTM32L552ZETxQ -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/main.o"
-arm-none-eabi-gcc -o "MCU-HelloWorld.elf" @"objects.list"   -mcpu=cortex-m33 -T"F:\Embedded\STM32\NUCLEO-L552ZE-Q\MCU-HelloWorld\STM32L552ZETXQ_FLASH.ld" --specs=nosys.specs -Wl,-Map="MCU-HelloWorld.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: MCU-HelloWorld.elf
- 
-arm-none-eabi-size  MCU-HelloWorld.elf 
-arm-none-eabi-objdump -h -S MCU-HelloWorld.elf  > "MCU-HelloWorld.list"
-   text	   data	    bss	    dec	    hex	filename
-   3508	     92	   1900	   5500	   157c	MCU-HelloWorld.elf
-Finished building: default.size.stdout
- 
-Finished building: MCU-HelloWorld.list
+Finished building: 04-PointersAdvanced.list
  
