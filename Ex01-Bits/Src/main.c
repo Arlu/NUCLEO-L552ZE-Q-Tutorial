@@ -17,13 +17,48 @@
  */
 
 #include <stdint.h>
+#include <stdio.h>
 
 #if !defined(__SOFT_FP__) && defined(__ARM_FP)
   #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
 #endif
 
+#define BIT_N(n) (1 << (n))
+
 int main(void)
 {
+	uint32_t dummy = 0x0;
+	printf("dummy = 0x%08lx\n", dummy);
+
+	for (int i = 0; i < 8; i += 2)
+	{
+		printf("dummy | 0x%08lx -> ", (uint32_t)BIT_N(i));
+		dummy |= BIT_N(i);
+		printf("dummy = 0x%08lx\n", dummy);
+	}
+
+	printf("dummy | 0x%08lx -> ", 0x0000FF00UL);
+	dummy |= 0x0000FF00UL;
+	printf("dummy = 0x%08lx\n", dummy);
+
+	for (int i = 8; i < 16; i += 2)
+	{
+		printf("dummy & 0x%08lx -> ", ~(uint32_t)BIT_N(i));
+		dummy &= ~BIT_N(i);
+		printf("dummy = 0x%08lx\n", dummy);
+	}
+
+	for (int i = 1; i < 16; i *= 2)
+	{
+		printf("dummy ^ 0x%08lx -> ", (uint32_t)BIT_N(i + 16));
+		dummy ^= BIT_N(i + 16);
+		printf("dummy = 0x%08lx\n", dummy);
+	}
+
+	printf("dummy ^ 0x%08lx -> ", 0xFFFF0000UL);
+	dummy ^= 0xFFFF0000UL;
+	printf("dummy = 0x%08lx\n", dummy);
+
     /* Loop forever */
 	for(;;);
 }
