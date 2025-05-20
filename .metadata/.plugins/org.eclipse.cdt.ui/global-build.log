@@ -1,49 +1,14 @@
-11:33:39 **** Incremental Build of configuration Debug for project Ex02-TurnLEDs ****
+17:43:08 **** Incremental Build of configuration Debug for project 08-BitfieldGpioInput ****
 make -j24 all 
 arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m33 -std=gnu11 -g3 -DDEBUG -DNUCLEO_L552ZE_Q -DSTM32 -DSTM32L5 -DSTM32L552ZETxQ -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/main.o"
-arm-none-eabi-gcc -o "Ex02-TurnLEDs.elf" @"objects.list"   -mcpu=cortex-m33 -T"F:\Embedded\STM32\NUCLEO-L552ZE-Q\Ex02-TurnLEDs\STM32L552ZETXQ_FLASH.ld" --specs=nosys.specs -Wl,-Map="Ex02-TurnLEDs.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Ex02-TurnLEDs.elf
+arm-none-eabi-gcc -o "08-BitfieldGpioInput.elf" @"objects.list"   -mcpu=cortex-m33 -T"F:\Embedded\STM32\NUCLEO-L552ZE-Q\08-BitfieldGpioInput\STM32L552ZETXQ_FLASH.ld" --specs=nosys.specs -Wl,-Map="08-BitfieldGpioInput.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: 08-BitfieldGpioInput.elf
  
-arm-none-eabi-size  Ex02-TurnLEDs.elf 
-arm-none-eabi-objdump -h -S Ex02-TurnLEDs.elf  > "Ex02-TurnLEDs.list"
+arm-none-eabi-size  08-BitfieldGpioInput.elf 
+arm-none-eabi-objdump -h -S 08-BitfieldGpioInput.elf  > "08-BitfieldGpioInput.list"
    text	   data	    bss	    dec	    hex	filename
-    832	      0	   1568	   2400	    960	Ex02-TurnLEDs.elf
+    864	      0	   1568	   2432	    980	08-BitfieldGpioInput.elf
 Finished building: default.size.stdout
  
-Finished building: Ex02-TurnLEDs.list
- 
-11:33:42 **** Incremental Build of configuration Debug for project Ex02-TurnLEDs ****
-make -j24 all 
-arm-none-eabi-size  Ex02-TurnLEDs.elf 
-   text	   data	    bss	    dec	    hex	filename
-    832	      0	   1568	   2400	    960	Ex02-TurnLEDs.elf
-Finished building: default.size.stdout
- 
-11:34:33 **** Incremental Build of configuration Debug for project Ex02-TurnLEDs ****
-make -j24 all 
-arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m33 -std=gnu11 -g3 -DDEBUG -DNUCLEO_L552ZE_Q -DSTM32 -DSTM32L5 -DSTM32L552ZETxQ -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/main.o"
-arm-none-eabi-gcc -o "Ex02-TurnLEDs.elf" @"objects.list"   -mcpu=cortex-m33 -T"F:\Embedded\STM32\NUCLEO-L552ZE-Q\Ex02-TurnLEDs\STM32L552ZETXQ_FLASH.ld" --specs=nosys.specs -Wl,-Map="Ex02-TurnLEDs.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Ex02-TurnLEDs.elf
- 
-arm-none-eabi-size  Ex02-TurnLEDs.elf 
-arm-none-eabi-objdump -h -S Ex02-TurnLEDs.elf  > "Ex02-TurnLEDs.list"
-   text	   data	    bss	    dec	    hex	filename
-    832	      0	   1568	   2400	    960	Ex02-TurnLEDs.elf
-Finished building: default.size.stdout
- 
-Finished building: Ex02-TurnLEDs.list
- 
-11:35:23 **** Incremental Build of configuration Debug for project Ex02-TurnLEDs ****
-make -j24 all 
-arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m33 -std=gnu11 -g3 -DDEBUG -DNUCLEO_L552ZE_Q -DSTM32 -DSTM32L5 -DSTM32L552ZETxQ -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/main.o"
-arm-none-eabi-gcc -o "Ex02-TurnLEDs.elf" @"objects.list"   -mcpu=cortex-m33 -T"F:\Embedded\STM32\NUCLEO-L552ZE-Q\Ex02-TurnLEDs\STM32L552ZETXQ_FLASH.ld" --specs=nosys.specs -Wl,-Map="Ex02-TurnLEDs.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Ex02-TurnLEDs.elf
- 
-arm-none-eabi-size  Ex02-TurnLEDs.elf 
-arm-none-eabi-objdump -h -S Ex02-TurnLEDs.elf  > "Ex02-TurnLEDs.list"
-   text	   data	    bss	    dec	    hex	filename
-    896	      0	   1568	   2464	    9a0	Ex02-TurnLEDs.elf
-Finished building: default.size.stdout
- 
-Finished building: Ex02-TurnLEDs.list
+Finished building: 08-BitfieldGpioInput.list
  

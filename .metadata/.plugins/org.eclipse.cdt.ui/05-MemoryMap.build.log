@@ -1,0 +1,16 @@
+22:41:04 **** Build of configuration Debug for project 05-MemoryMap ****
+make -j24 all 
+arm-none-eabi-gcc -o "05-MemoryMap.elf" @"objects.list"   -mcpu=cortex-m33 -T"F:\Embedded\STM32\NUCLEO-L552ZE-Q\05-MemoryMap\STM32L552ZETXQ_FLASH.ld" --specs=nosys.specs -Wl,-Map="05-MemoryMap.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: 05-MemoryMap.elf
+ 
+arm-none-eabi-size  05-MemoryMap.elf 
+arm-none-eabi-objdump -h -S 05-MemoryMap.elf  > "05-MemoryMap.list"
+   text	   data	    bss	    dec	    hex	filename
+    832	      0	   1568	   2400	    960	05-MemoryMap.elf
+Finished building: default.size.stdout
+ 
+Finished building: 05-MemoryMap.list
+ 
+
+22:41:06 Build Finished. 0 errors, 0 warnings. (took 1s.272ms)
+

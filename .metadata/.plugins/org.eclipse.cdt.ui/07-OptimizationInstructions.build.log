@@ -1,0 +1,19 @@
+16:30:58 **** Incremental Build of configuration Debug for project 07-OptimizationInstructions ****
+make -j24 all 
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m33 -std=gnu11 -g3 -DDEBUG -DNUCLEO_L552ZE_Q -DSTM32 -DSTM32L5 -DSTM32L552ZETxQ -c -I../Inc -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/main.o"
+arm-none-eabi-gcc "../Src/syscalls.c" -mcpu=cortex-m33 -std=gnu11 -g3 -DDEBUG -DNUCLEO_L552ZE_Q -DSTM32 -DSTM32L5 -DSTM32L552ZETxQ -c -I../Inc -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/syscalls.d" -MT"Src/syscalls.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/syscalls.o"
+arm-none-eabi-gcc "../Src/sysmem.c" -mcpu=cortex-m33 -std=gnu11 -g3 -DDEBUG -DNUCLEO_L552ZE_Q -DSTM32 -DSTM32L5 -DSTM32L552ZETxQ -c -I../Inc -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/sysmem.d" -MT"Src/sysmem.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/sysmem.o"
+arm-none-eabi-gcc -o "07-OptimizationInstructions.elf" @"objects.list"   -mcpu=cortex-m33 -T"F:\Embedded\STM32\NUCLEO-L552ZE-Q\07-OptimizationInstructions\STM32L552ZETXQ_FLASH.ld" --specs=nosys.specs -Wl,-Map="07-OptimizationInstructions.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: 07-OptimizationInstructions.elf
+ 
+arm-none-eabi-size  07-OptimizationInstructions.elf 
+arm-none-eabi-objdump -h -S 07-OptimizationInstructions.elf  > "07-OptimizationInstructions.list"
+   text	   data	    bss	    dec	    hex	filename
+   4632	     92	   1900	   6624	   19e0	07-OptimizationInstructions.elf
+Finished building: default.size.stdout
+ 
+Finished building: 07-OptimizationInstructions.list
+ 
+
+16:30:59 Build Finished. 0 errors, 0 warnings. (took 744ms)
+
