@@ -1,14 +1,21 @@
-17:43:08 **** Incremental Build of configuration Debug for project 08-BitfieldGpioInput ****
+19:09:34 **** Incremental Build of configuration Debug for project Ex04-MultipleButtonsWithDebounceMultisamples ****
 make -j24 all 
-arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m33 -std=gnu11 -g3 -DDEBUG -DNUCLEO_L552ZE_Q -DSTM32 -DSTM32L5 -DSTM32L552ZETxQ -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/main.o"
-arm-none-eabi-gcc -o "08-BitfieldGpioInput.elf" @"objects.list"   -mcpu=cortex-m33 -T"F:\Embedded\STM32\NUCLEO-L552ZE-Q\08-BitfieldGpioInput\STM32L552ZETXQ_FLASH.ld" --specs=nosys.specs -Wl,-Map="08-BitfieldGpioInput.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: 08-BitfieldGpioInput.elf
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m33 -std=gnu11 -g3 -DDEBUG -DNUCLEO_L552ZE_Q -DSTM32 -DSTM32L5 -DSTM32L552ZETxQ -c -I../Inc -O3 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/main.o"
+arm-none-eabi-gcc -o "Ex04-MultipleButtonsWithDebounceMultisamples.elf" @"objects.list"   -mcpu=cortex-m33 -T"F:\Embedded\STM32\NUCLEO-L552ZE-Q\Ex04-MultipleButtonsWithDebounceMultisamples\STM32L552ZETXQ_FLASH.ld" --specs=nosys.specs -Wl,-Map="Ex04-MultipleButtonsWithDebounceMultisamples.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Ex04-MultipleButtonsWithDebounceMultisamples.elf
  
-arm-none-eabi-size  08-BitfieldGpioInput.elf 
-arm-none-eabi-objdump -h -S 08-BitfieldGpioInput.elf  > "08-BitfieldGpioInput.list"
+arm-none-eabi-size  Ex04-MultipleButtonsWithDebounceMultisamples.elf 
+arm-none-eabi-objdump -h -S Ex04-MultipleButtonsWithDebounceMultisamples.elf  > "Ex04-MultipleButtonsWithDebounceMultisamples.list"
    text	   data	    bss	    dec	    hex	filename
-    864	      0	   1568	   2432	    980	08-BitfieldGpioInput.elf
+   1148	      0	   1568	   2716	    a9c	Ex04-MultipleButtonsWithDebounceMultisamples.elf
 Finished building: default.size.stdout
  
-Finished building: 08-BitfieldGpioInput.list
+Finished building: Ex04-MultipleButtonsWithDebounceMultisamples.list
+ 
+19:09:41 **** Incremental Build of configuration Debug for project Ex04-MultipleButtonsWithDebounceMultisamples ****
+make -j24 all 
+arm-none-eabi-size  Ex04-MultipleButtonsWithDebounceMultisamples.elf 
+   text	   data	    bss	    dec	    hex	filename
+   1148	      0	   1568	   2716	    a9c	Ex04-MultipleButtonsWithDebounceMultisamples.elf
+Finished building: default.size.stdout
  

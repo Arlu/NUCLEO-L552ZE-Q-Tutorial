@@ -17,42 +17,22 @@
  */
 
 #include <stdint.h>
+#include "stm32l552.h"
 
 #if !defined(__SOFT_FP__) && defined(__ARM_FP)
   #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
 #endif
 
-//Address offset: 0x4C RCC_AHB2ENR
-//RRC base address 0x4002 1000
-const uint32_t RCC_AHB2ENR      = 0x40021000UL + 0x4C;
-
-// GPIOB base addr 0x4202 0400
-const uint32_t GPIOB_base_addr  = 0x42020400UL;
-// GPIOB mode register 0x00
-const uint32_t GPIOB_MODER      = GPIOB_base_addr + 0x0;
-
-//GPIO B data output register offset GPIO port output data register (GPIOx_ODR) 0x14
-const uint32_t GPIOB_ODR        = GPIOB_base_addr + 0x14;
-const uint32_t GPIO_OUTPUT_MODE = 0x1;
-
 int main(void)
 {
-	volatile uint32_t *p_clk_ctrl_reg = (uint32_t*)(RCC_AHB2ENR);
-	volatile uint32_t *p_gpioB_mode_reg = (uint32_t*)(GPIOB_MODER);
-	volatile uint32_t *p_gpioB_out_reg = (uint32_t*)(GPIOB_ODR);
-
-	// get the RRC value
-	*p_clk_ctrl_reg |= (0x1 << 1);
-	// clear p_gpioB_mode_reg
-	*p_gpioB_mode_reg &= ~(0x3 << 2 * 7);
-	// set the p_gpioB_mode_reg
-	*p_gpioB_mode_reg |= (0x1 << 2 * 7);
-	// set the pin output
-	*p_gpioB_out_reg |= (0x1 << 7);
+	RCC->AHB2ENR.GPIOBEN = ENABLED;
+//	GPIOB->MODER.MODER7 = RESET_MODE;
+	GPIOB->MODER.MODER7 = OUTPUT_MODE;
+	GPIOB->ODR.ODR7 = ON;
 
     while(1)
     {
-    	*p_gpioB_out_reg ^= (0x1 << 7);
+    	GPIOB->ODR.ODR7 = ~GPIOB->ODR.ODR7;
 
     	// Delay (volatile counter prevents optimization):
     	for (volatile uint32_t i = 0; i < 100000; i++);

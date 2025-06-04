@@ -1,0 +1,10 @@
+18:06:56 **** Incremental Build of configuration Debug for project 11-ThreadHandler ****
+make -j24 all 
+arm-none-eabi-size  11-ThreadHandler.elf 
+   text	   data	    bss	    dec	    hex	filename
+   3408	     92	   1900	   5400	   1518	11-ThreadHandler.elf
+Finished building: default.size.stdout
+ 
+
+18:06:56 Build Finished. 0 errors, 0 warnings. (took 155ms)
+

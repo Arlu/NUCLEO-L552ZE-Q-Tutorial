@@ -50,6 +50,6 @@ int main(void)
 	// set the pin output
 	*p_gpioB_out_reg |= (0x1 << 7);
 
-    /* Loop forever */
+	/* Loop forever */
 	for(;;);
 }

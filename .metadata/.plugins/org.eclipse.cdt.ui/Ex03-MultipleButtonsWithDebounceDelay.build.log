@@ -1,0 +1,17 @@
+19:01:32 **** Incremental Build of configuration Debug for project Ex03-MultipleButtonsWithDebounceDelay ****
+make -j24 all 
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m33 -std=gnu11 -g3 -DDEBUG -DNUCLEO_L552ZE_Q -DSTM32 -DSTM32L5 -DSTM32L552ZETxQ -c -I../Inc -O3 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/main.o"
+arm-none-eabi-gcc -o "Ex03-MultipleButtonsWithDebounceDelay.elf" @"objects.list"   -mcpu=cortex-m33 -T"F:\Embedded\STM32\NUCLEO-L552ZE-Q\Ex03-MultipleButtonsWithDebounceDelay\STM32L552ZETXQ_FLASH.ld" --specs=nosys.specs -Wl,-Map="Ex03-MultipleButtonsWithDebounceDelay.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Ex03-MultipleButtonsWithDebounceDelay.elf
+ 
+arm-none-eabi-size  Ex03-MultipleButtonsWithDebounceDelay.elf 
+arm-none-eabi-objdump -h -S Ex03-MultipleButtonsWithDebounceDelay.elf  > "Ex03-MultipleButtonsWithDebounceDelay.list"
+   text	   data	    bss	    dec	    hex	filename
+   1208	      0	   1568	   2776	    ad8	Ex03-MultipleButtonsWithDebounceDelay.elf
+Finished building: default.size.stdout
+ 
+Finished building: Ex03-MultipleButtonsWithDebounceDelay.list
+ 
+
+19:01:33 Build Finished. 0 errors, 0 warnings. (took 413ms)
+

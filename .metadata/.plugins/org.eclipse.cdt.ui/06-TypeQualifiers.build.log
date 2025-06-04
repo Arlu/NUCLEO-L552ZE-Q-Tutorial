@@ -1,6 +1,9 @@
-22:50:12 **** Incremental Build of configuration Debug for project 06-TypeQualifiers ****
+18:38:25 **** Incremental Build of configuration Debug for project 06-TypeQualifiers ****
 make -j24 all 
+arm-none-eabi-gcc -mcpu=cortex-m33 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Startup/startup_stm32l552zetxq.d" -MT"Startup/startup_stm32l552zetxq.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Startup/startup_stm32l552zetxq.o" "../Startup/startup_stm32l552zetxq.s"
 arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m33 -std=gnu11 -g3 -DDEBUG -DNUCLEO_L552ZE_Q -DSTM32 -DSTM32L5 -DSTM32L552ZETxQ -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/main.o"
+arm-none-eabi-gcc "../Src/syscalls.c" -mcpu=cortex-m33 -std=gnu11 -g3 -DDEBUG -DNUCLEO_L552ZE_Q -DSTM32 -DSTM32L5 -DSTM32L552ZETxQ -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/syscalls.d" -MT"Src/syscalls.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/syscalls.o"
+arm-none-eabi-gcc "../Src/sysmem.c" -mcpu=cortex-m33 -std=gnu11 -g3 -DDEBUG -DNUCLEO_L552ZE_Q -DSTM32 -DSTM32L5 -DSTM32L552ZETxQ -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/sysmem.d" -MT"Src/sysmem.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/sysmem.o"
 arm-none-eabi-gcc -o "06-TypeQualifiers.elf" @"objects.list"   -mcpu=cortex-m33 -T"F:\Embedded\STM32\NUCLEO-L552ZE-Q\06-TypeQualifiers\STM32L552ZETXQ_FLASH.ld" --specs=nosys.specs -Wl,-Map="06-TypeQualifiers.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: 06-TypeQualifiers.elf
  
@@ -13,5 +16,5 @@ Finished building: default.size.stdout
 Finished building: 06-TypeQualifiers.list
  
 
-22:50:13 Build Finished. 0 errors, 0 warnings. (took 414ms)
+18:38:25 Build Finished. 0 errors, 0 warnings. (took 454ms)
 
