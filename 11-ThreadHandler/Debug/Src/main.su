@@ -1,3 +1,3 @@
-../Src/main.c:28:6:generate_interrupt	0	static
+../Src/main.c:28:6:generate_interrupt	16	static
 ../Src/main.c:40:5:main	8	static
-../Src/main.c:52:6:RTC_IRQHandler	0	static
+../Src/main.c:52:6:RTC_IRQHandler	8	static

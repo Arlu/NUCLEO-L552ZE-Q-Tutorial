@@ -1,2 +1,2 @@
 ../Src/itm_debug.c:18:6:ITM_SendChar	2
-../Src/itm_debug.c:33:5:_write	4
+../Src/itm_debug.c:33:5:_write	2

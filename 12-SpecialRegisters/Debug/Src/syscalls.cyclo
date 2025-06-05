@@ -2,8 +2,8 @@
 ../Src/syscalls.c:49:5:_getpid	1
 ../Src/syscalls.c:54:5:_kill	1
 ../Src/syscalls.c:62:6:_exit	1
-../Src/syscalls.c:68:27:_read	3
-../Src/syscalls.c:81:27:_write	3
+../Src/syscalls.c:68:27:_read	2
+../Src/syscalls.c:81:27:_write	2
 ../Src/syscalls.c:93:5:_close	1
 ../Src/syscalls.c:100:5:_fstat	1
 ../Src/syscalls.c:107:5:_isatty	1
