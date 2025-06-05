@@ -24,32 +24,134 @@
   #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
 #endif
 
-/* This function executes in THREAD MODE of the processor */
-void generate_interrupt()
+// Function to create a SVCall exception for demonstration
+__attribute__((naked)) void trigger_svc(void)
 {
-	uint32_t *pSTIR  = (uint32_t*)0xE000EF00;
-	uint32_t *pNVIC_ISER0 = (uint32_t*)0xE000E100;
+    __asm volatile ("SVC #0");
+    __asm volatile ("BX LR");
+}
 
-	//enable IRQ2 interrupt
-	*pNVIC_ISER0 |= (1 << 2);
+// Special function to read the current PC value
+__attribute__((always_inline)) static inline uint32_t get_pc(void)
+{
+    uint32_t pc;
+    __asm volatile ("MOV %0, PC" : "=r" (pc));
+    return pc;
+}
 
-	//generate an interrupt from software for IRQ3
-	*pSTIR = (2 & 0x1FF);
+void print_registers(void)
+{
+    // Variables to store register values
+    uint32_t msp_value, psp_value, lr_value, pc_value, xpsr_value;
+
+    // Read MSP (Main Stack Pointer)
+    __asm volatile ("MRS %0, MSP" : "=r" (msp_value));
+
+    // Read PSP (Process Stack Pointer)
+    __asm volatile ("MRS %0, PSP" : "=r" (psp_value));
+
+    // Read LR (Link Register)
+    __asm volatile ("MOV %0, LR" : "=r" (lr_value));
+
+    // Get PC value
+    pc_value = get_pc();
+
+    // Read xPSR (Program Status Register)
+    __asm volatile ("MRS %0, XPSR" : "=r" (xpsr_value));
+
+    // Print the values
+    printf("MSP (Main Stack Pointer): 0x%08lX\n", msp_value);
+    printf("PSP (Process Stack Pointer): 0x%08lX\n", psp_value);
+    printf("LR (Link Register): 0x%08lX\n", lr_value);
+    printf("PC (Program Counter): 0x%08lX\n", pc_value);
+    printf("xPSR: 0x%08lX\n", xpsr_value);
+
+    // Decoding xPSR
+    printf("xPSR Decoded:\n");
+    printf("  N=%ld, Z=%ld, C=%ld, V=%ld, Q=%ld\n",
+           (xpsr_value >> 31) & 1,    // N flag
+           (xpsr_value >> 30) & 1,    // Z flag
+           (xpsr_value >> 29) & 1,    // C flag
+           (xpsr_value >> 28) & 1,    // V flag
+           (xpsr_value >> 27) & 1);   // Q flag
+
+    printf("  ISR Number: %lu\n", xpsr_value & 0xFF); // Exception number
+}
+
+// SVC Handler for demonstrating EXC_RETURN values
+void SVC_Handler(void)
+{
+    uint32_t exc_return;
+
+    // Read LR which contains EXC_RETURN value
+    __asm volatile ("MOV %0, LR" : "=r" (exc_return));
+
+    printf("\nInside SVC Handler:\n");
+    printf("EXC_RETURN value: 0x%08lX\n", exc_return);
+
+    // Decode EXC_RETURN value
+    printf("EXC_RETURN decoded:\n");
+
+    if (exc_return & (1 << 2)) {
+        printf("  Return stack: PSP\n");
+    } else {
+        printf("  Return stack: MSP\n");
+    }
+
+    if (exc_return & (1 << 3)) {
+        printf("  Return mode: Thread\n");
+    } else {
+        printf("  Return mode: Handler\n");
+    }
+
+    if (exc_return & (1 << 4)) {
+        printf("  Floating-point state: Not preserved\n");
+    } else {
+        printf("  Floating-point state: Preserved\n");
+    }
+}
+
+// Function to switch to PSP for Thread mode
+void switch_to_psp(void)
+{
+    // Allocate space for Process Stack
+    static uint32_t process_stack[128];
+    uint32_t psp = (uint32_t)(&process_stack[128]); // Top of stack
+
+    // Set PSP
+    __asm volatile ("MSR PSP, %0" :: "r" (psp));
+
+    // Switch to PSP in Thread mode
+    __asm volatile (
+        "MRS r0, CONTROL \n"
+        "ORR r0, r0, #2 \n"    // Set SPSEL bit to use PSP
+        "MSR CONTROL, r0 \n"
+        "ISB \n"               // Instruction sync barrier
+    );
+
+    printf("\nSwitched to PSP in Thread mode\n");
 }
 
 int main(void)
 {
-	printf("In thread mode : before interrupt\n");
+	// Initialize your hardware, UART, etc.
 
-	generate_interrupt();
+	printf("Register values in Thread mode using MSP:\n");
+	print_registers();
 
-	printf("In thread mode : after interrupt\n");
+	// Switch to PSP
+	switch_to_psp();
 
+	printf("\nRegister values in Thread mode using PSP:\n");
+	print_registers();
+
+	// Trigger SVC to see EXC_RETURN values
+	printf("\nTriggering SVC exception...\n");
+	trigger_svc();
+
+	printf("\nBack to Thread mode\n");
+	print_registers();
+
+	/* Loop forever */
 	for (;;);
-}
-
-/* This function(ISR) executes in HANDLER MODE of the processor */
-void RTC_IRQHandler(void)
-{
-	printf("In handler mode : ISR\n");
 }
