@@ -24,11 +24,14 @@
   #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
 #endif
 
+static uint32_t stack_size = 0;
+
 int main(void)
 {
 	while (1)
 	{
-		__asm volatile ("PUSH {R0}");
+		__asm volatile ("POP {R0}");
+		stack_size++;
 	}
 
 	/* Loop forever */
@@ -38,29 +41,6 @@ int main(void)
 void HardFault_Handler(void)
 {
 	printf("Hard fault detected\n");
-	while(1);
-}
-
-void MemManage_Handler(void)
-{
-	printf("Mem Manage fault detected\n");
-	while(1);
-}
-
-void BusFault_Handler(void)
-{
-	printf("Bus fault detected\n");
-	while(1);
-}
-
-void UsageFault_Handler(void)
-{
-	printf("Usage fault detected\n");
-	while(1);
-}
-
-void SecureFault_Handler(void)
-{
-	printf("Secure fault detected\n");
+	printf("The stack size was %lu words - %lu bytes.\n", stack_size, stack_size * 4);
 	while(1);
 }
