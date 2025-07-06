@@ -1,0 +1,10 @@
+../Inc/NVIC_registers.h:139:20:NVIC_EnableIRQ	24	static
+../Inc/NVIC_registers.h:199:20:NVIC_ClearPendingIRQ	24	static
+../Inc/NVIC_registers.h:236:20:NVIC_TriggerInterrupt	16	static
+../Inc/NVIC_registers.h:261:24:__get_CONTROL	16	static,ignoring_inline_asm
+../Inc/NVIC_registers.h:332:13:decode_exc_return	16	static
+../Src/main.c:38:29:switch_sp_to_psp	0	static,ignoring_inline_asm
+../Src/main.c:60:6:print_stack_frame	16	static
+../Src/main.c:83:6:USART2_IRQHandler	32	static,ignoring_inline_asm
+../Src/main.c:124:6:trigger_test_interrupt	8	static
+../Src/main.c:134:5:main	24	static,ignoring_inline_asm

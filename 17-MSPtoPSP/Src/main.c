@@ -19,48 +19,139 @@
 #include <stdint.h>
 #include <stdio.h>
 #include "stm32l552.h"
+#include "NVIC_registers.h"
 
 #if !defined(__SOFT_FP__) && defined(__ARM_FP)
   #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
 #endif
 
+#define TEST_IRQ     62  /* Maps to IRQ number 62 */
+
+#define SRAM_START   0x20000000U
+#define SIZE_SRAM    ((256) * (1024))
+#define SRAM_END     ((SRAM_START) + (SIZE_SRAM))
+
+uint32_t g_exc_return; // Store EXC_RETURN value
+//uint32_t *pPSP = (uint32_t*)SRAM_END;
+
+/* Switch from MSP to PSP */
+__attribute__((naked)) void switch_sp_to_psp(void)
+{
+    // 1. Initialize the PSP with stack start address:
+	uint32_t *pPSP = (uint32_t*)SRAM_END;
+
+	// Get the value of PSP of current_task:
+	__asm volatile ("PUSH {LR}"); // Preserve LR which connects back to main()
+    __asm volatile ("MOV R0, %0" : : "r" (pPSP)); // Move pPSP value to R0
+	__asm volatile ("MSR PSP, R0"); // Initialize PSP
+	__asm volatile ("POP {LR}");  // Pops back LR value
+
+	//2. Change SP to PSP using CONTROL register:
+	__asm volatile ("MOV R0,#0X02");
+	__asm volatile ("MSR CONTROL,R0");
+	__asm volatile ("BX LR");
+}
+
+
+
+void print_stack_frame(volatile uint32_t *stack_frame);
+
+
+void print_stack_frame(volatile uint32_t *stack_frame)
+{
+    printf("===== STACK FRAME =====\n");
+    printf("R0   = 0x%08lX\n", stack_frame[0]);  /* R0 is at offset 0 */
+    printf("R1   = 0x%08lX\n", stack_frame[1]);  /* R1 is at offset 1 */
+    printf("R2   = 0x%08lX\n", stack_frame[2]);  /* R2 is at offset 2 */
+    printf("R3   = 0x%08lX\n", stack_frame[3]);  /* R3 is at offset 3 */
+    printf("R12  = 0x%08lX\n", stack_frame[4]);  /* R12 is at offset 4 */
+    printf("LR   = 0x%08lX\n", stack_frame[5]);  /* LR is at offset 5 */
+    printf("PC   = 0x%08lX\n", stack_frame[6]);  /* PC is at offset 6 */
+    printf("xPSR = 0x%08lX\n", stack_frame[7]);  /* xPSR is at offset 7 */
+    printf("===============================\n");
+}
+
+
+/**
+ * Interrupt handler for our test interrupt
+ *
+ * When an interrupt triggers, the Cortex-M4 hardware automatically pushes:
+ * R0-R3, R12, LR, PC, xPSR onto the current stack (PSP or MSP)
+ *
+ * This function visualizes this stack frame
+ */
+void USART2_IRQHandler(void)
+{
+    /* Capture the EXC_RETURN value from LR at start of handler */
+    g_exc_return = read_exc_return();
+
+    /* Get pointer to the automatically stacked registers */
+    uint32_t *stack_frame;
+
+    /* Check which stack pointer was active when the interrupt occurred */
+    uint32_t control = __get_CONTROL();
+    if (control & 0x2) { /* Thread mode using PSP */
+        stack_frame = (uint32_t *)__get_PSP();
+    } else {            /* Thread mode using MSP or Handler mode */
+        stack_frame = (uint32_t *)__get_MSP();
+    }
+
+    /* Print EXC_RETURN information */
+    printf("\n-- INTERRUPT HANDLER ENTERED --\n");
+    printf("EXC_RETURN value in LR: 0x%08lX\n", g_exc_return);
+    printf("Meaning: %s\n\n", decode_exc_return(g_exc_return));
+
+    /* Print the automatically stacked registers */
+    print_stack_frame(stack_frame);
+
+    /* Visualize stack pointer address before and after processing */
+    printf("\nSP before registers pushed: 0x%08lX\n", (uint32_t)stack_frame + 32); /* 8 registers * 4 bytes */
+    printf("SP during IRQ handler:     0x%08lX\n", (uint32_t)stack_frame);
+
+    printf("\nWhen this handler returns, the processor will:\n");
+    printf("1. Restore registers R0-R3, R12, LR, PC, PSR from stack\n");
+    printf("2. Use EXC_RETURN (0x%08lX) to determine return behavior\n", g_exc_return);
+    printf("3. Return to %s mode using %s\n\n",
+           (g_exc_return & 0x8) ? "Thread" : "Handler",
+           (g_exc_return & 0x4) ? "PSP" : "MSP");
+
+    /* Clear the pending interrupt */
+    NVIC_ClearPendingIRQ(TEST_IRQ);
+}
+
+
+/* Setup and trigger the interrupt */
+void trigger_test_interrupt(void)
+{
+    /* Trigger the interrupt using STIR */
+//    NVIC_SetPendingIRQ(TEST_IRQ);
+    NVIC_TriggerInterrupt(TEST_IRQ);
+
+    printf("Returned from interrupt handler\n");
+}
+
+
 int main(void)
 {
-	while (1)
-	{
-		__asm volatile ("PUSH {R0}");
-	}
+    uint32_t *stack_frame;
 
-	/* Loop forever */
-	for (;;);
-}
+	printf("\n--- Stack Visualization Demo ---\n");
+    /* Start first task by switching to PSP */
+//    switch_sp_to_psp();
 
-void HardFault_Handler(void)
-{
-	printf("Hard fault detected\n");
-	while(1);
-}
+    /* Enable the interrupt */
+    NVIC_EnableIRQ(TEST_IRQ);
+    /* Check which stack pointer was active when the interrupt occurred */
+    uint32_t control = __get_CONTROL();
+    if (control & 0x2) { /* Thread mode using PSP */
+        stack_frame = (uint32_t *)__get_PSP();
+    } else {            /* Thread mode using MSP or Handler mode */
+        stack_frame = (uint32_t *)__get_MSP();
+    }
+    /* Print the automatically stacked registers */
+    print_stack_frame(stack_frame);
+    trigger_test_interrupt();
 
-void MemManage_Handler(void)
-{
-	printf("Mem Manage fault detected\n");
-	while(1);
-}
-
-void BusFault_Handler(void)
-{
-	printf("Bus fault detected\n");
-	while(1);
-}
-
-void UsageFault_Handler(void)
-{
-	printf("Usage fault detected\n");
-	while(1);
-}
-
-void SecureFault_Handler(void)
-{
-	printf("Secure fault detected\n");
-	while(1);
+    /* Loop forever */
+	for(;;);
 }
