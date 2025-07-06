@@ -14,7 +14,7 @@
 /* Core Registers */
 #define SCB_BASE            0xE000ED00UL
 #define NVIC_BASE           0xE000E100UL
-#define SYST_BASE        0xE000E010UL
+#define SYST_BASE           0xE000E010UL
 //#define SYSTICK_BASE        0xE000E010UL
 #define STIR_BASE           0xE000EF00UL
 
