@@ -1,0 +1,11 @@
+../Inc/NVIC_registers.h:139:20:NVIC_EnableIRQ	24	static
+../Inc/NVIC_registers.h:179:20:NVIC_SetPendingIRQ	24	static
+../Inc/NVIC_registers.h:199:20:NVIC_ClearPendingIRQ	24	static
+../Inc/NVIC_registers.h:219:20:NVIC_SetPriority	32	static
+../Inc/NVIC_registers.h:261:24:__get_CONTROL	16	static,ignoring_inline_asm
+../Inc/NVIC_registers.h:332:13:decode_exc_return	16	static
+../Src/main.c:43:6:print_stack_frame	16	static
+../Src/main.c:60:6:USART1_IRQHandler	32	static,ignoring_inline_asm
+../Src/main.c:100:6:USART2_IRQHandler	32	static,ignoring_inline_asm
+../Src/main.c:168:6:trigger_nested_interrupt_demo	24	static,ignoring_inline_asm
+../Src/main.c:195:5:main	8	static
