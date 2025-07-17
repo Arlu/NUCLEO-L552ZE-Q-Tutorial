@@ -1,0 +1,16 @@
+../Inc/NVIC_registers.h:238:20:NVIC_TriggerInterrupt	16	static
+../Inc/NVIC_registers.h:334:13:decode_exc_return	16	static
+../Src/main.c:60:6:analyze_cfsr	16	static
+../Src/main.c:105:6:analyze_hfsr	16	static
+../Src/main.c:115:6:common_fault_handler	24	static,ignoring_inline_asm
+../Src/main.c:215:6:HardFault_Handler	4	static,ignoring_inline_asm
+../Src/main.c:235:7:MemManage_Handler	4	static,ignoring_inline_asm
+../Src/main.c:255:6:BusFault_Handler	4	static,ignoring_inline_asm
+../Src/main.c:276:6:UsageFault_Handler	4	static,ignoring_inline_asm
+../Src/main.c:296:6:SecureFault_Handler	4	static,ignoring_inline_asm
+../Src/main.c:316:28:Common_Handler	16	static
+../Src/main.c:321:6:trigger_memmanage_fault	16	static
+../Src/main.c:339:6:trigger_bus_fault	16	static
+../Src/main.c:355:6:trigger_usage_fault	24	static,ignoring_inline_asm
+../Src/main.c:381:6:trigger_hard_fault	8	static
+../Src/main.c:395:5:main	16	static
