@@ -62,13 +62,15 @@ void USART2_IRQHandler(void) {
 
     printf("Entered to first interrupt.\n");
 
+    // Clear the pending interrupt:
+    NVIC_ClearPendingIRQ(FIRST_IRQ);
+
     // Trigger the second interrupt:
 	printf("Triggering second interrupt...\n");
 	NVIC_SetPendingIRQ(SECOND_IRQ);
 
     // Clear the pending second interrupt:
 	NVIC_ClearPendingIRQ(SECOND_IRQ);
-	NVIC_ClearPendingIRQ(FIRST_IRQ);
 
     // Track exit:
     g_first_exit_count++;
